@@ -22,7 +22,7 @@ jobs:
     outputs:
       dirs: ${{ steps.make-list.outputs.dirs }}
 
-  client_go_0_23:
+  client_go_0_28:
     needs: prepare
     strategy:
       fail-fast: false
@@ -31,17 +31,17 @@ jobs:
       matrix:
         example_program: ${{ fromJson(needs.prepare.outputs.dirs) }}
         k8s_cluster_ver:
-        - "1.22.15"
-        - "1.23.12"
-        - "1.24.6"
-        - "1.25.2"
+        - "1.28.9"
+        - "1.29.12"
+        - "1.30.8"
+        - "1.31.4"
     uses: ./.github/workflows/test-one.yml
     with:
       example_program: ${{ matrix.example_program }}
       k8s_cluster_ver: ${{ matrix.k8s_cluster_ver }}
-      k8s_package_ver: "0.23.1"
+      k8s_package_ver: "0.28.14"
 
-  client_go_0_24:
+  client_go_0_29:
     needs: prepare
     strategy:
       fail-fast: false
@@ -50,17 +50,17 @@ jobs:
       matrix:
         example_program: ${{ fromJson(needs.prepare.outputs.dirs) }}
         k8s_cluster_ver:
-        - "1.22.15"
-        - "1.23.12"
-        - "1.24.6"
-        - "1.25.2"
+        - "1.28.9"
+        - "1.29.12"
+        - "1.30.8"
+        - "1.31.4"
     uses: ./.github/workflows/test-one.yml
     with:
       example_program: ${{ matrix.example_program }}
       k8s_cluster_ver: ${{ matrix.k8s_cluster_ver }}
-      k8s_package_ver: "0.24.7"
+      k8s_package_ver: "0.29.12"
 
-  client_go_0_25:
+  client_go_0_30:
     needs: prepare
     strategy:
       fail-fast: false
@@ -69,12 +69,31 @@ jobs:
       matrix:
         example_program: ${{ fromJson(needs.prepare.outputs.dirs) }}
         k8s_cluster_ver:
-        - "1.22.15"
-        - "1.23.12"
-        - "1.24.6"
-        - "1.25.2"
+        - "1.28.9"
+        - "1.29.12"
+        - "1.30.8"
+        - "1.31.4"
     uses: ./.github/workflows/test-one.yml
     with:
       example_program: ${{ matrix.example_program }}
       k8s_cluster_ver: ${{ matrix.k8s_cluster_ver }}
-      k8s_package_ver: "0.25.3"
+      k8s_package_ver: "0.30.8"
+
+  client_go_0_31:
+        needs: prepare
+        strategy:
+          fail-fast: false
+          # A matrix can produce no more than 256 elements,
+          # so testing too many k8s versions is unfeasible.
+          matrix:
+            example_program: ${{ fromJson(needs.prepare.outputs.dirs) }}
+            k8s_cluster_ver:
+            - "1.28.9"
+            - "1.29.12"
+            - "1.30.8"
+            - "1.31.4"
+        uses: ./.github/workflows/test-one.yml
+        with:
+          example_program: ${{ matrix.example_program }}
+          k8s_cluster_ver: ${{ matrix.k8s_cluster_ver }}
+          k8s_package_ver: "0.31.4"

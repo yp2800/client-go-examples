@@ -1,4 +1,4 @@
-module github.com/iximiuz/client-go-examples/crud-typed-simple
+module github.com/iximiuz/client-go-examples/patch-add-ephemeral-container
 
 go 1.22.10
 

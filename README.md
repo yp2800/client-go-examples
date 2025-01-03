@@ -6,25 +6,24 @@
 
 A collection of mini-programs demonstrating various [client-go](https://github.com/kubernetes/client-go) use cases augmented by a [preconfigured online development environment](https://labs.iximiuz.com/playgrounds/k8s-client-go/). Inspired by [client-go/examples](https://github.com/kubernetes/client-go/tree/master/examples).
 
-The intention (at least so far) is to test a (more or less) fresh version of Go and packages against a few latest
-Kubernetes versions.
+The intention is to test a (more or less) fresh version of Go and `k8s.io` packages against the [currently maintained Kubernetes release branches](https://kubernetes.io/releases/).
 
 What is tested at the moment:
 
-- `go 1.18`
-- `k8s.io/client-go v0.23.1 v0.24.7 v0.25.3`
-- `Kubernetes v1.22.15 1.23.12 v1.24.6 v1.25.2`
+- `go 1.22.10`
+- `k8s.io/client-go 0.28.14 0.29.12 0.30.8 0.31.4` (maintained release branches)
+- `Kubernetes 1.28.9 1.29.12 1.30.8 1.31.4` (best-effort match with versions supported by `kind`)
 
 ## Setup
 
-Most examples expect `minikube` with at least two Kubernetes clusters - `shared1` and `shared2`.
+Most examples expect at least two Kubernetes clusters - `shared1` and `shared2`.
 
 ```bash
 curl -sLS https://get.arkade.dev | sudo sh
-arkade get minikube kubectl
+arkade get kind kubectl
 
-minikube start --profile shared1
-minikube start --profile shared2
+kind create cluster --name shared1
+kind create cluster --name shared2
 ```
 
 ## Run
@@ -33,7 +32,10 @@ Oversimplified (for now):
 
 ```bash
 cd <program>
-go run main.go
+make test
+
+# or from the root folder:
+make test-all
 ```
 
 ## TODO
